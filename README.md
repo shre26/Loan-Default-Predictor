@@ -2,7 +2,7 @@
 
 Predicts the probability that a loan applicant will default, using the [Kaggle Loan Default dataset](https://www.kaggle.com/datasets/nikhil1e9/loan-default) (255K+ records).
 
-**[Live App](your-streamlit-cloud-url)** • **[EDA Notebook on Kaggle](your-kaggle-url)**
+**[Live App](your-streamlit-cloud-url)** • **[EDA Notebook on Kaggle](https://www.kaggle.com/code/shreyavgaonkar/loan-default-dataset-eda)**
 
 ## Problem
 Lenders need to estimate default risk before approving a loan. This project builds an end-to-end pipeline — from raw data to a deployed prediction dashboard — that outputs a default probability given applicant details.
