@@ -1,6 +1,6 @@
 /* App background */
 .stApp {
-    background: linear-gradient(180deg, #F8FCFF 0%, #EEF8FF 40%, #E6F4FF 100%);
+    background: linear-gradient(180deg, #f1f9ff 0%, #dff2ff 40%, #cfe9ff 100%);
 }
 
 .block-container {
@@ -27,17 +27,25 @@ h1, h2, h3, h4, p, label {
     margin-bottom: 15px;
 }
 
-/* Select boxes */
-.stSelectbox div[data-baseweb="select"] > div {
-    background: #FFFFFF;
-    border: 1px solid #C9E6FF;
-    border-radius: 12px;
+/* Select Boxes */
+
+div[data-baseweb="select"] > div {
+    background-color: #FFFFFF !important;
+    border: 1.5px solid #C9E6FF !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(77, 163, 255, 0.08);
+    transition: all 0.2s ease;
 }
 
-div[data-testid="stSelectbox"] label,
-div[data-testid="stSlider"] label {
-    color: #2C5282 !important;
-    font-weight: 600;
+div[data-baseweb="select"] > div:hover {
+    border-color: #7CC4FF !important;
+    box-shadow: 0 4px 12px rgba(77, 163, 255, 0.15);
+}
+
+div[data-baseweb="select"] input,
+div[data-baseweb="select"] span {
+    background: transparent !important;
+    color: #1E3A5F !important;
 }
 
 /* Sliders */
