@@ -1,0 +1,107 @@
+/* App background */
+.stApp {
+    background: linear-gradient(180deg, #F8FCFF 0%, #EEF8FF 40%, #E6F4FF 100%);
+}
+
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Text */
+h1, h2, h3, h4, p, label {
+    color: #1E3A5F !important;
+}
+
+.stMarkdown {
+    color: #34506B !important;
+}
+
+/* Section headings */
+.section-header {
+    color: #2B6CB0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-bottom: 2px solid #B7DEFF;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* Select boxes */
+.stSelectbox div[data-baseweb="select"] > div {
+    background: #FFFFFF;
+    border: 1px solid #C9E6FF;
+    border-radius: 12px;
+}
+
+div[data-testid="stSelectbox"] label,
+div[data-testid="stSlider"] label {
+    color: #2C5282 !important;
+    font-weight: 600;
+}
+
+/* Sliders */
+.stSlider {
+    padding-top: 8px;
+}
+
+.stSlider [data-baseweb="slider"] > div > div {
+    background: #4DA3FF !important;
+}
+
+.stSlider [role="slider"] {
+    background-color: #4DA3FF !important;
+    border: 2px solid #FFFFFF !important;
+    box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.18);
+}
+
+.stSlider [data-baseweb="slider"] div[role="presentation"]:first-child {
+    background: #7CC4FF !important;
+}
+
+.stSlider [role="slider"]:hover {
+    background-color: #2E8BFF !important;
+}
+
+/* Predict button */
+.stButton button {
+    background: #4DA3FF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    height: 48px;
+}
+
+.stButton button:hover {
+    background: #2E8BFF;
+}
+
+/* Prediction result card */
+.prediction-card {
+    background: white;
+    border: 1px solid #D9EDFF;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(120, 170, 220, 0.15);
+}
+
+.prediction-title {
+    color: #34506B;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.prediction-prob {
+    color: #2B6CB0;
+    font-size: 42px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.prediction-status {
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 18px;
+}
