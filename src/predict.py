@@ -1,8 +1,10 @@
+import os
 import joblib
 import pandas as pd
 
-MODEL_PATH = "models/final_model.pkl"
-PREPROCESSOR_PATH = "models/preprocessor.pkl"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # project root
+MODEL_PATH = os.path.join(BASE_DIR, "models", "final_model.pkl")
+PREPROCESSOR_PATH = os.path.join(BASE_DIR, "models", "preprocessor.pkl")
 BINARY_MAP = {"Yes": 1, "No": 0}
 
 
