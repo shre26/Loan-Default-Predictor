@@ -27,8 +27,7 @@ h1, h2, h3, h4, p, label {
     margin-bottom: 15px;
 }
 
-/* Select Boxes */
-
+/* Select boxes */
 div[data-baseweb="select"] > div {
     background-color: #FFFFFF !important;
     border: 1.5px solid #C9E6FF !important;
@@ -48,27 +47,20 @@ div[data-baseweb="select"] span {
     color: #1E3A5F !important;
 }
 
-/* Sliders */
-.stSlider {
-    padding-top: 8px;
+/* Number inputs */
+div[data-testid="stNumberInput"] input {
+    background-color: #FFFFFF !important;
+    border: 1.5px solid #C9E6FF !important;
+    border-radius: 12px !important;
+    color: #1E3A5F !important;
 }
 
-.stSlider [data-baseweb="slider"] > div > div {
-    background: #4DA3FF !important;
-}
-
-.stSlider [role="slider"] {
-    background-color: #4DA3FF !important;
-    border: 2px solid #FFFFFF !important;
-    box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.18);
-}
-
-.stSlider [data-baseweb="slider"] div[role="presentation"]:first-child {
-    background: #7CC4FF !important;
-}
-
-.stSlider [role="slider"]:hover {
-    background-color: #2E8BFF !important;
+/* Extra vertical spacing between fields so an accidental scroll-touch
+   is less likely to land on an interactive element on mobile */
+div[data-testid="stSelectbox"],
+div[data-testid="stNumberInput"] {
+    margin-bottom: 14px;
+    touch-action: manipulation;
 }
 
 /* Predict button */
