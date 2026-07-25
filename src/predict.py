@@ -38,18 +38,62 @@ def estimate_dti_ratio(income, loan_amount, interest_rate, loan_term):
     return float(np.clip(dti_ratio, 0.0, 1.0))
 
 
-def predict_default(input_dict, model, preprocessor):
+def _normalize_binary(value):
+    if isinstance(value, str):
+        normalized = value.strip().title()
+        if normalized in BINARY_MAP:
+            return BINARY_MAP[normalized]
+
+    if value in (0, 1):
+        return int(value)
+
+    return value
+
+
+def _ensure_required_features(input_dict, preprocessor):
     input_dict = input_dict.copy()
-    input_dict["DTIRatio"] = estimate_dti_ratio(
-        income=input_dict["Income"],
-        loan_amount=input_dict["LoanAmount"],
-        interest_rate=input_dict["InterestRate"],
-        loan_term=input_dict["LoanTerm"],
-    )
+    required_features = getattr(preprocessor, "feature_names_in_", None)
+
+    # The deployed model pipeline expects DTIRatio because it was used in training.
+    if "DTIRatio" not in input_dict and (
+        required_features is None or "DTIRatio" in required_features
+    ):
+        required_for_dti = ["Income", "LoanAmount", "InterestRate", "LoanTerm"]
+        missing_for_dti = [f for f in required_for_dti if f not in input_dict]
+        if missing_for_dti:
+            raise ValueError(
+                "Cannot compute DTIRatio. Missing fields: "
+                + ", ".join(sorted(missing_for_dti))
+            )
+
+        input_dict["DTIRatio"] = estimate_dti_ratio(
+            income=input_dict["Income"],
+            loan_amount=input_dict["LoanAmount"],
+            interest_rate=input_dict["InterestRate"],
+            loan_term=input_dict["LoanTerm"],
+        )
+
+    return input_dict
+
+
+def predict_default(input_dict, model, preprocessor):
+    input_dict = _ensure_required_features(input_dict, preprocessor)
 
     df = pd.DataFrame([input_dict])
     for col in ["HasMortgage", "HasDependents", "HasCoSigner"]:
-        df[col] = df[col].map(BINARY_MAP)
+        if col in df.columns:
+            df[col] = df[col].apply(_normalize_binary)
+
+    required_features = getattr(preprocessor, "feature_names_in_", None)
+    if required_features is not None:
+        missing = sorted(set(required_features) - set(df.columns))
+        if missing:
+            raise ValueError(
+                "Input is missing required model features: " + ", ".join(missing)
+            )
+
+        # Keep expected feature ordering to match training-time schema.
+        df = df.reindex(columns=required_features)
 
     X = preprocessor.transform(df)
     proba = model.predict_proba(X)[0][1]

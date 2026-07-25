@@ -87,7 +87,11 @@ if predict_clicked:
         "HasDependents": has_dependents, "LoanPurpose": loan_purpose,
         "HasCoSigner": has_cosigner,
     }
-    prediction, proba = predict_default(input_dict, model, preprocessor)
+    try:
+        prediction, proba = predict_default(input_dict, model, preprocessor)
+    except ValueError as exc:
+        st.error(f"Prediction failed: {exc}")
+        st.stop()
 
     if prediction == 1:
         color = "#EF4444"
