@@ -17,25 +17,17 @@ def load_css(file_name):
 
 load_css("style.css")
 
-# Prevents accidental value changes when a number field is focused and the
-# page is scrolled with a mouse wheel (desktop only — touch scroll on
-# mobile does not trigger this, since it isn't a "wheel" event).
+st.title("🏦 Loan Default Risk Assessment")
+
 st.markdown(
     """
-    <script>
-    document.addEventListener("wheel", function (e) {
-        if (document.activeElement && document.activeElement.type === "number") {
-            document.activeElement.blur();
-        }
-    }, { passive: true });
-    </script>
+    <div class="instructions-card">
+        Fill in the applicant's details in the three sections below, then press
+        <b>Predict Default Risk</b> to see the estimated probability of default.
+    </div>
     """,
     unsafe_allow_html=True,
 )
-
-st.title("🏦 Loan Default Risk Assessment")
-st.write("Predict the likelihood of loan default using applicant financial and demographic information.")
-st.info("Fill in the fields below, then click **Predict Default Risk** at the bottom to see the result.")
 
 model, preprocessor = load_artifacts()
 
@@ -52,30 +44,30 @@ with left_col:
     st.markdown('<div class="section-header">Employment & Income</div>', unsafe_allow_html=True)
     employment_type = st.selectbox("Employment Type", ["Full-time", "Part-time", "Self-employed", "Unemployed"])
     months_employed = st.number_input(
-        "Months Employed at Current Job", min_value=0, max_value=480, value=60, step=1,
-        help="How many months you've worked at your current job.",
+        "Months Employed", min_value=0, max_value=480, value=60, step=1,
+        help="How many months you've been at your current job.",
     )
     income = st.number_input(
-        "Annual Income ($)", min_value=0, max_value=2_000_000, value=60000, step=1000,
+        "Annual Income ($)", min_value=15000, max_value=200000, value=60000, step=1000,
     )
     credit_score = st.number_input(
         "Credit Score", min_value=300, max_value=850, value=650, step=1,
-        help="Your credit score, typically between 300 and 850.",
+        help="Usually between 300 and 850 — check your bank app or credit report.",
     )
 
 with right_col:
     st.markdown('<div class="section-header">Loan Details</div>', unsafe_allow_html=True)
     loan_amount = st.number_input(
-        "Loan Amount Requested ($)", min_value=1000, max_value=2_000_000, value=50000, step=1000,
+        "Loan Amount ($)", min_value=1000, max_value=250000, value=50000, step=1000,
     )
     interest_rate = st.number_input(
-        "Interest Rate (%)", min_value=1.0, max_value=30.0, value=10.0, step=0.1, format="%.1f",
+        "Interest Rate (%)", min_value=1.0, max_value=30.0, value=10.0, step=0.1,
+        help="The annual interest rate offered or expected on this loan.",
     )
     loan_term = st.selectbox("Loan Term (months)", [12, 24, 36, 48, 60])
     num_credit_lines = st.number_input(
-        "Number of Credit Cards / Loans You Currently Have",
-        min_value=0, max_value=20, value=3, step=1,
-        help="Count all active credit cards and loans, including this one.",
+        "Number of Open Credit Accounts", min_value=0, max_value=20, value=3, step=1,
+        help="Total credit cards, loans, or credit lines you currently have open.",
     )
     has_mortgage = st.selectbox("Has Mortgage", ["Yes", "No"])
     loan_purpose = st.selectbox("Loan Purpose", ["Auto", "Business", "Education", "Home", "Other"])

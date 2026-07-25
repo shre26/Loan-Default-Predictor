@@ -17,6 +17,17 @@ h1, h2, h3, h4, p, label {
     color: #34506B !important;
 }
 
+/* Instructions card */
+.instructions-card {
+    background: #FFFFFF;
+    border: 1px solid #D9EDFF;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    color: #34506B;
+    font-size: 15px;
+}
+
 /* Section headings */
 .section-header {
     color: #2B6CB0;
@@ -34,6 +45,9 @@ div[data-baseweb="select"] > div {
     border-radius: 12px !important;
     box-shadow: 0 2px 8px rgba(77, 163, 255, 0.08);
     transition: all 0.2s ease;
+    /* lets a vertical swipe over the select still scroll the page instead
+       of being captured as a drag/open gesture on mobile */
+    touch-action: pan-y;
 }
 
 div[data-baseweb="select"] > div:hover {
@@ -50,17 +64,14 @@ div[data-baseweb="select"] span {
 /* Number inputs */
 div[data-testid="stNumberInput"] input {
     background-color: #FFFFFF !important;
-    border: 1.5px solid #C9E6FF !important;
     border-radius: 12px !important;
     color: #1E3A5F !important;
 }
 
-/* Extra vertical spacing between fields so an accidental scroll-touch
-   is less likely to land on an interactive element on mobile */
-div[data-testid="stSelectbox"],
-div[data-testid="stNumberInput"] {
-    margin-bottom: 14px;
-    touch-action: manipulation;
+div[data-testid="stNumberInput"] > div {
+    border: 1.5px solid #C9E6FF !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(77, 163, 255, 0.08);
 }
 
 /* Predict button */
@@ -71,6 +82,7 @@ div[data-testid="stNumberInput"] {
     border-radius: 10px;
     font-weight: 600;
     height: 48px;
+    width: 100%;
 }
 
 .stButton button:hover {
